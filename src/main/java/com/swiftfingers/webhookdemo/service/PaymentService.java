@@ -29,8 +29,10 @@ public class PaymentService {
 
     public Payment processPayment(PaymentRequest paymentRequest) {
         String transactionId = UUID.randomUUID().toString();
-        Payment payment = Payment.builder().userId(paymentRequest.getUserId())
-                .paymentAmount(paymentRequest.getAmount()).transactionId(transactionId)
+        Payment payment = Payment.builder()
+                .userId(paymentRequest.getUserId())
+                .paymentAmount(paymentRequest.getAmount())
+                .transactionId(transactionId)
                 .status(PaymentStatus.PENDING)
                 .message("Payment pending.")
                 .build();

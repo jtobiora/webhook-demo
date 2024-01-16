@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
@@ -34,7 +35,7 @@ public class PaymentGateway {
         // Simulate actual payment processing logic here in the gateway service
         // In a real scenario, you would integrate with a secure payment processing service.
         // Here, we simulate a successful payment if the following are met:
-        // - card number is correct, expiry date has not reached and amount available is greater than payment amount
+        // - card number is correct, expiry date has not reached and balance available is greater than payment amount
 
         Optional<Card> optionalCard = cardRepository.findCardByCardNumber(paymentRequest.getCardNumber());
         PaymentResponse response;
@@ -69,8 +70,8 @@ public class PaymentGateway {
 
             // Compare the expiry date with the current date
             return expiryDate.isAfter(currentDate) || expiryDate.equals(currentDate);
-        } catch (Exception e) {
-            return false; // Invalid format or parsing error
+        } catch (DateTimeParseException e) {
+           throw e;
         }
     }
 
