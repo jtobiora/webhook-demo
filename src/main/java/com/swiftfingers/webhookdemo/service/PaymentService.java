@@ -55,7 +55,7 @@ public class PaymentService {
         payment.setMessage(response.getMessage());
         paymentRepository.save(payment);
 
-        //send mail to user
+        //send mail to user to notify them of payment status
         emailService.sendMail(response.getUserEmail(),
                 "Payment",
                 response.getMessage());

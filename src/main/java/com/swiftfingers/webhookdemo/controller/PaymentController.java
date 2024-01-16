@@ -27,7 +27,7 @@ public class PaymentController {
     }
 
     @PostMapping("/process")
-    public ResponseEntity processPayments (@Valid() @RequestBody PaymentRequest paymentRequest, BindingResult result) {
+    public ResponseEntity processPayments (@Valid @RequestBody PaymentRequest paymentRequest, BindingResult result) {
         log.info("Received payment request {} ", paymentRequest);
         if (result.hasErrors()) {
             // Handle validation errors
@@ -42,7 +42,7 @@ public class PaymentController {
     }
 
     @PostMapping("/webhook")
-    public void handlePaymentResponse (@RequestBody PaymentResponse paymentResponse) {
+    public void handlePaymentResponse (@Valid @RequestBody PaymentResponse paymentResponse) {
         paymentService.handlePaymentResponse(paymentResponse);
 
     }

@@ -54,7 +54,7 @@ public class PaymentGateway {
         response.setTransactionId(paymentRequest.getTransactionId());
         response.setUserEmail(paymentRequest.getUserId());
 
-        //send response to a webhook
+        //send response to a webhook url
         restTemplate.postForLocation(webhookURL, response);
     }
 
