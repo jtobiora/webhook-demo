@@ -13,10 +13,11 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-/*
-* A Hypothetical or Simulated Payment Gateway Service that does the actual payment and calls the
-* webhook URL to submit a payment response using HTTP
-* */
+/**
+ * A Hypothetical or Simulated Payment Gateway Service that does the actual payment and calls the
+ * webhook URL to submit a payment response using HTTP
+ */
+
 @Service
 public class PaymentGateway {
 
@@ -30,10 +31,11 @@ public class PaymentGateway {
         this.cardRepository = cardRepository;
     }
     public void processPayments(PaymentRequest paymentRequest) {
-        // Simulate payment processing logic here
+        // Simulate actual payment processing logic here in the gateway service
         // In a real scenario, you would integrate with a secure payment processing service.
         // Here, we simulate a successful payment if the following are met:
         // - card number is correct, expiry date has not reached and amount available is greater than payment amount
+
         Optional<Card> optionalCard = cardRepository.findCardByCardNumber(paymentRequest.getCardNumber());
         PaymentResponse response;
         if (optionalCard.isPresent()) {
@@ -46,11 +48,13 @@ public class PaymentGateway {
                 response = buildPaymentResponse("The payment was successful", PaymentStatus.COMPLETED);
             }
         } else {
-            response = PaymentResponse.builder().message("Incorrect Card Details.").isPaymentSuccessful(false).status(PaymentStatus.FAILED).transactionId(paymentRequest.getTransactionId()).build();
+            response = buildPaymentResponse("Incorrect Card Details", PaymentStatus.FAILED);
         }
 
         response.setTransactionId(paymentRequest.getTransactionId());
         response.setUserEmail(paymentRequest.getUserId());
+
+        //send response to a webhook
         restTemplate.postForLocation(webhookURL, response);
     }
 

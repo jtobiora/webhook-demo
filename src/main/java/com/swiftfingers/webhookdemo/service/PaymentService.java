@@ -46,7 +46,7 @@ public class PaymentService {
         return paymentRepository.findPaymentsByTransactionId(transactionId).orElseThrow();
     }
 
-    public void updatePaymentStatus (PaymentResponse response) {
+    public void handlePaymentResponse (PaymentResponse response) {
         if (Objects.isNull(response))
             throw new NoSuchElementException("No Payment response received");
 

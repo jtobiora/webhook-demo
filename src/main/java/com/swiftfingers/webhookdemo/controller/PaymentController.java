@@ -39,7 +39,7 @@ public class PaymentController {
 
     @PostMapping("/webhook")
     public void handlePaymentResponse (@RequestBody PaymentResponse paymentResponse) {
-        paymentService.updatePaymentStatus(paymentResponse);
+        paymentService.handlePaymentResponse(paymentResponse);
 
     }
 
