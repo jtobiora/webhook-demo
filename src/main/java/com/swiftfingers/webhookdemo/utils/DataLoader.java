@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/*
-* Loads or sets up mock card details for use in the database
-* */
+/**
+ * Loads or sets up mock card details for use in the database
+ *
+ */
 @Component
 public class DataLoader implements CommandLineRunner {
 

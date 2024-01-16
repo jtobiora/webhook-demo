@@ -5,6 +5,7 @@ import com.swiftfingers.webhookdemo.dto.PaymentRequest;
 import com.swiftfingers.webhookdemo.dto.PaymentResponse;
 import com.swiftfingers.webhookdemo.service.PaymentService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/payment")
+@Slf4j
 public class PaymentController {
 
     private final PaymentService paymentService;
@@ -26,10 +28,12 @@ public class PaymentController {
 
     @PostMapping("/process")
     public ResponseEntity processPayments (@Valid() @RequestBody PaymentRequest paymentRequest, BindingResult result) {
+        log.info("Received payment request {} ", paymentRequest);
         if (result.hasErrors()) {
             // Handle validation errors
             StringBuilder errors = new StringBuilder();
             result.getAllErrors().forEach(error -> errors.append(error.getDefaultMessage()).append("\n"));
+            log.info("Payment Error: {}", errors);
             return new ResponseEntity<>(errors.toString(), HttpStatus.BAD_REQUEST);
         }
 
