@@ -12,8 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaymentResponse {
     private String message;
+
     private PaymentStatus status;
+
     private String transactionId;
+
     private boolean isPaymentSuccessful;
+
     private String userEmail;
 }

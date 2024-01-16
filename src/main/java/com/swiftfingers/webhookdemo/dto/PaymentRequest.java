@@ -16,10 +16,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class PaymentRequest {
     private double amount;
+
     private String userId;
+
     @NotBlank(message = "Card number cannot be empty")
     private String cardNumber;
+
     @NotBlank(message = "Expiry date must be provided")
     private String expiryDate;
+
     private String transactionId;
 }
