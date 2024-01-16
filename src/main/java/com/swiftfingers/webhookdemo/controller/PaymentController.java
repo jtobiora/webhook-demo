@@ -43,6 +43,7 @@ public class PaymentController {
 
     @PostMapping("/webhook")
     public void handlePaymentResponse (@Valid @RequestBody PaymentResponse paymentResponse) {
+        log.info("Payment response : {}", paymentResponse);
         paymentService.handlePaymentResponse(paymentResponse);
 
     }
