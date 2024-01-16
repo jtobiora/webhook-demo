@@ -18,21 +18,4 @@ public class AppConfig {
         return new RestTemplate();
     }
 
-//    @Bean
-//    public JavaMailSender getJavaMailSender() {
-////        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-////        mailSender.setHost(env);
-////        mailSender.setPort(587);
-////
-////        mailSender.setUsername("your@gmail.com");
-////        mailSender.setPassword("copiedPassword");
-////
-////        Properties props = mailSender.getJavaMailProperties();
-////        props.put("mail.transport.protocol", "smtp");
-////        props.put("mail.smtp.auth", "true");
-////        props.put("mail.smtp.starttls.enable", "true");
-////        props.put("mail.debug", "true");
-//
-//        return null;
-//    }
 }

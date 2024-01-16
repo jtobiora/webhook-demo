@@ -43,13 +43,14 @@ public class PaymentGateway {
             } else if (!isValidExpiryDate(paymentRequest.getExpiryDate())) {
                 response = buildPaymentResponse("The card has expired.", PaymentStatus.FAILED);
             } else {
-                response = buildPaymentResponse("The payment was succesful", PaymentStatus.COMPLETED);
+                response = buildPaymentResponse("The payment was successful", PaymentStatus.COMPLETED);
             }
         } else {
             response = PaymentResponse.builder().message("Incorrect Card Details.").isPaymentSuccessful(false).status(PaymentStatus.FAILED).transactionId(paymentRequest.getTransactionId()).build();
         }
 
         response.setTransactionId(paymentRequest.getTransactionId());
+        response.setUserEmail(paymentRequest.getUserId());
         restTemplate.postForLocation(webhookURL, response);
     }
 

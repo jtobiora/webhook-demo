@@ -31,7 +31,7 @@ public class PaymentService {
         String transactionId = UUID.randomUUID().toString();
         Payment payment = Payment.builder().userId(paymentRequest.getUserId())
                 .paymentAmount(paymentRequest.getAmount()).transactionId(transactionId)
-                .status(PaymentStatus.PROCESSING)
+                .status(PaymentStatus.PENDING)
                 .message("Payment pending.")
                 .build();
 
@@ -54,6 +54,11 @@ public class PaymentService {
         payment.setStatus(response.getStatus());
         payment.setMessage(response.getMessage());
         paymentRepository.save(payment);
+
+        //send mail to user
+        emailService.sendMail(response.getUserEmail(),
+                "Payment",
+                response.getMessage());
     }
 
 }

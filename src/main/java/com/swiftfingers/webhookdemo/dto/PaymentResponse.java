@@ -15,4 +15,5 @@ public class PaymentResponse {
     private PaymentStatus status;
     private String transactionId;
     private boolean isPaymentSuccessful;
+    private String userEmail;
 }
